@@ -7,18 +7,31 @@
       >
         <el-table-column label="Id" prop="id"></el-table-column>
         <el-table-column label="Title" prop="title"></el-table-column>
-        <el-checkbox>Completed?</el-checkbox>
         <el-table-column align="right">
           <template slot="header" slot-scope="scope">
             <el-input v-model="search" size="mini" placeholder="Type to search" />
           </template>
           <template slot-scope="scope">
-            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
             <el-button
               size="mini"
               type="danger"
+              icon="el-icon-delete"
+              circle
               @click="handleDelete(scope.$index, scope.row)"
-            >Delete</el-button>
+            ></el-button>
+            <el-button
+              size="mini"
+              icon="el-icon-edit"
+              circle
+              @click="handleEdit(scope.$index, scope.row)"
+            ></el-button>
+            <el-button
+              size="mini"
+              icon="el-icon-check"
+              circle
+              type="success"
+              @click="handleComplete(scope.$index, scope.row)"
+            ></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -39,6 +52,17 @@ export default {
     return {
       search: ""
     };
+  },
+  methods: {
+    handleDelete(idx, row) {
+      console.log(idx, row);
+    },
+    handleEdit(idx, row) {
+      console.log(idx, row);
+    },
+    handleComplete(idx, row) {
+      console.log(idx, row);
+    }
   }
 };
 </script>

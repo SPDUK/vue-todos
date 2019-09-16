@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <Todos />
+    <!-- todos refers to the todos returned from data(), passing down as todos as a prop -->
+    <Todos v-bind:todos="todos" />
   </div>
 </template>
 
@@ -16,6 +17,16 @@ export default {
         {
           id: 1,
           title: "Todo One",
+          completed: false
+        },
+        {
+          id: 2,
+          title: "Todo Two",
+          completed: false
+        },
+        {
+          id: 2,
+          title: "Todo Three",
           completed: false
         }
       ]
@@ -33,6 +44,5 @@ export default {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  line-height: 14;
 }
 </style>

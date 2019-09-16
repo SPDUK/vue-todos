@@ -1,18 +1,38 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Todos />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import Todos from "../components/Todos";
 
 export default {
   name: "home",
-  components: {
-    HelloWorld
+  components: { Todos },
+  data() {
+    return {
+      todos: [
+        {
+          id: 1,
+          title: "Todo One",
+          completed: false
+        }
+      ]
+    };
   }
 };
 </script>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 14;
+}
+</style>

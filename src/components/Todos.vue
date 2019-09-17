@@ -2,6 +2,7 @@
   <div class="container">
     <el-card class="box-card">
       <!-- filter out any todos that do not include the search state -->
+      <!-- not sure how to put this inside a function yet outside the template, but you probably can -->
       <el-table
         :data="
           todos.filter(
@@ -13,7 +14,7 @@
         <el-table-column label="Id" prop="id"></el-table-column>
         <el-table-column label="Title" prop="title"></el-table-column>
         <el-table-column align="right">
-          <template slot="header" slot-scope="scope">
+          <template slot="header">
             <el-input
               v-model="search"
               size="mini"

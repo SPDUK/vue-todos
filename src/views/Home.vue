@@ -1,12 +1,19 @@
 <template>
   <div class="home">
     <!-- todos refers to the todos returned from data(), passing down as todos as a prop -->
-    <Todos v-bind:todos="todos" />
+    <!-- catch the event with v-on  -->
+    <Todos
+      v-bind:todos="todos"
+      v-on:handle-delete="handleDelete"
+      v-on:handle-complete="handleComplete"
+      v-on:handle-edit="handleEdit"
+    />
   </div>
 </template>
 
 <script>
 import Todos from "../components/Todos";
+import { update } from "ramda";
 
 export default {
   name: "home",
@@ -25,12 +32,47 @@ export default {
           completed: true
         },
         {
-          id: 2,
+          id: 3,
           title: "Todo Three",
           completed: false
         }
       ]
     };
+  },
+  methods: {
+    handleDelete(rowId) {
+      const isNotRowId = ({ id }) => rowId !== id;
+      this.todos = this.todos.filter(isNotRowId);
+    },
+    handleEdit(idx, row) {
+      console.log(idx, row);
+    },
+    handleComplete(rowId) {
+      const idx = this.todos.findIndex(({ id }) => id === rowId);
+      const currentTodo = this.todos[idx];
+
+      const updatedTodo = {
+        ...currentTodo,
+        completed: !currentTodo.completed
+      };
+
+      // update todo state with new updated todo
+      this.todos = update(idx, updatedTodo)(this.todos);
+
+      // notify user of action working based on new completion status
+      if (updatedTodo.completed) {
+        this.$notify({
+          title: "Success",
+          message: `${currentTodo.title} Completed! 😎`,
+          type: "success"
+        });
+      } else {
+        this.$notify.info({
+          title: "Info",
+          message: `${currentTodo.title} not Completed! 😱`
+        });
+      }
+    }
   }
 };
 </script>

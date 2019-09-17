@@ -23,25 +23,26 @@
             />
           </template>
           <template slot-scope="scope">
+            <!-- emit an event up to the Home component -->
             <el-button
               size="mini"
               type="danger"
               icon="el-icon-delete"
               circle
-              @click="handleDelete(scope.$index, scope.row)"
+              @click="$emit('handle-delete', scope.row.id)"
             ></el-button>
             <el-button
               size="mini"
               icon="el-icon-edit"
               circle
-              @click="handleEdit(scope.$index, scope.row)"
+              @click="$emit('handle-edit', scope.row.id)"
             ></el-button>
             <el-button
               size="mini"
               icon="el-icon-check"
               circle
               type="success"
-              @click="handleComplete(scope.$index, scope.row)"
+              @click="$emit('handle-complete', scope.row.id)"
             ></el-button>
           </template>
         </el-table-column>
@@ -64,15 +65,6 @@ export default {
     };
   },
   methods: {
-    handleDelete(idx, row) {
-      console.log(idx, row);
-    },
-    handleEdit(idx, row) {
-      console.log(idx, row);
-    },
-    handleComplete(idx, row) {
-      console.log(idx, row);
-    },
     tableRowClassName: ({ row: { completed } }) =>
       completed ? "completed-row" : ""
   }

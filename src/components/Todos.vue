@@ -4,6 +4,7 @@
       <!-- filter out any todos that do not include the search state -->
       <!-- not sure how to put this inside a function yet outside the template, but you probably can -->
       <el-table
+        :row-class-name="tableRowClassName"
         :data="
           todos.filter(
             ({ title }) =>
@@ -11,10 +12,10 @@
           )
         "
       >
-        <el-table-column label="Id" prop="id"></el-table-column>
+        >
         <el-table-column label="Title" prop="title"></el-table-column>
         <el-table-column align="right">
-          <template slot="header">
+          <template slot="header" slot-scope="scope">
             <el-input
               v-model="search"
               size="mini"
@@ -71,7 +72,9 @@ export default {
     },
     handleComplete(idx, row) {
       console.log(idx, row);
-    }
+    },
+    tableRowClassName: ({ row: { completed } }) =>
+      completed ? "completed-row" : ""
   }
 };
 </script>
@@ -84,5 +87,12 @@ export default {
 .box-card {
   width: 95%;
   max-width: 800px;
+}
+</style>
+
+<style>
+.el-table .completed-row {
+  background: #f0f9eb;
+  text-decoration: line-through;
 }
 </style>

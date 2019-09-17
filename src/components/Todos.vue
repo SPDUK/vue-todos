@@ -3,13 +3,22 @@
     <el-card class="box-card">
       <!-- filter out any todos that do not include the search state -->
       <el-table
-        :data="todos.filter(({ title }) => !search || title.toLowerCase().includes(search.toLowerCase()))"
+        :data="
+          todos.filter(
+            ({ title }) =>
+              !search || title.toLowerCase().includes(search.toLowerCase())
+          )
+        "
       >
         <el-table-column label="Id" prop="id"></el-table-column>
         <el-table-column label="Title" prop="title"></el-table-column>
         <el-table-column align="right">
           <template slot="header" slot-scope="scope">
-            <el-input v-model="search" size="mini" placeholder="Type to search" />
+            <el-input
+              v-model="search"
+              size="mini"
+              placeholder="Type to search"
+            />
           </template>
           <template slot-scope="scope">
             <el-button
@@ -38,7 +47,6 @@
     </el-card>
   </div>
 </template>
-
 
 <script>
 export default {

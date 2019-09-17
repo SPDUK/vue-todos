@@ -63,13 +63,13 @@ export default {
       if (updatedTodo.completed) {
         this.$notify({
           title: "Success",
-          message: `${currentTodo.title} Completed! 😎`,
+          message: `${updatedTodo.title} Completed! 😎`,
           type: "success"
         });
       } else {
         this.$notify.info({
           title: "Info",
-          message: `${currentTodo.title} not Completed! 😱`
+          message: `${updatedTodo.title} not Completed! 😱`
         });
       }
     }

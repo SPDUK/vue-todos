@@ -6,7 +6,6 @@
       v-bind:todos="todos"
       v-on:handle-delete="handleDelete"
       v-on:handle-complete="handleComplete"
-      v-on:handle-edit="handleEdit"
       v-on:handle-add-todo="addTodo"
     />
   </div>
@@ -21,32 +20,18 @@ export default {
   components: { Todos },
   data() {
     return {
-      todos: [
-        {
-          id: 1,
-          title: "Todo One",
-          completed: false
-        },
-        {
-          id: 2,
-          title: "Todo Two",
-          completed: true
-        },
-        {
-          id: 3,
-          title: "Todo Three",
-          completed: false
-        }
-      ]
+      todos: JSON.parse(localStorage.getItem("todos")) || []
     };
   },
   methods: {
+    saveTodos() {
+      localStorage.setItem("todos", JSON.stringify(this.todos));
+    },
     handleDelete(rowId) {
       const isNotRowId = ({ id }) => rowId !== id;
       this.todos = this.todos.filter(isNotRowId);
-    },
-    handleEdit(idx, row) {
-      console.log(idx, row);
+
+      this.saveTodos();
     },
     handleComplete(rowId) {
       const idx = this.todos.findIndex(({ id }) => id === rowId);
@@ -72,6 +57,8 @@ export default {
           message: `${updatedTodo.title} not completed! 😱`
         });
       }
+
+      this.saveTodos();
     },
     addTodo(title) {
       // don't add empty todos
@@ -87,6 +74,8 @@ export default {
         title: "Success",
         message: `${title} added!`
       });
+
+      this.saveTodos();
     }
   }
 };

@@ -34,12 +34,6 @@
             ></el-button>
             <el-button
               size="mini"
-              icon="el-icon-edit"
-              circle
-              @click="$emit('handle-edit', scope.row.id)"
-            ></el-button>
-            <el-button
-              size="mini"
               icon="el-icon-check"
               circle
               type="success"

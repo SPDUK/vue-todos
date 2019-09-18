@@ -31,6 +31,11 @@ export default {
       const isNotRowId = ({ id }) => rowId !== id;
       this.todos = this.todos.filter(isNotRowId);
 
+      this.$notify.success({
+        title: "Success",
+        message: "Deleted! 😎"
+      });
+
       this.saveTodos();
     },
     handleComplete(rowId) {

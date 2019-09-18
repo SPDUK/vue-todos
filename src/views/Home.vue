@@ -7,6 +7,7 @@
       v-on:handle-delete="handleDelete"
       v-on:handle-complete="handleComplete"
       v-on:handle-edit="handleEdit"
+      v-on:handle-add-todo="addTodo"
     />
   </div>
 </template>
@@ -61,17 +62,31 @@ export default {
 
       // notify user of action working based on new completion status
       if (updatedTodo.completed) {
-        this.$notify({
+        this.$notify.success({
           title: "Success",
-          message: `${updatedTodo.title} Completed! 😎`,
-          type: "success"
+          message: `${updatedTodo.title} completed! 😎`
         });
       } else {
         this.$notify.info({
           title: "Info",
-          message: `${updatedTodo.title} not Completed! 😱`
+          message: `${updatedTodo.title} not completed! 😱`
         });
       }
+    },
+    addTodo(title) {
+      // don't add empty todos
+      if (title.length < 1) return;
+
+      this.todos.push({
+        id: Math.random(),
+        title,
+        completed: false
+      });
+
+      this.$notify.success({
+        title: "Success",
+        message: `${title} added!`
+      });
     }
   }
 };

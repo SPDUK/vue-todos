@@ -48,14 +48,17 @@
           </template>
         </el-table-column>
       </el-table>
-      <div class="add-todo">
+      <form @submit="handleSubmit" class="add-todo">
         <el-input
           class="add-todo-input"
           placeholder="Create a new todo..."
           v-model="input"
+          autofocus="true"
         ></el-input>
-        <el-button class="add-todo-button" type="primary">Add Todo</el-button>
-      </div>
+        <el-button class="add-todo-button" type="primary" native-type="submit"
+          >Add Todo</el-button
+        >
+      </form>
     </el-card>
   </div>
 </template>
@@ -76,7 +79,12 @@ export default {
   },
   methods: {
     tableRowClassName: ({ row: { completed } }) =>
-      completed ? "completed-row" : ""
+      completed ? "completed-row" : "",
+    handleSubmit(e) {
+      e.preventDefault();
+      this.$emit("handle-add-todo", this.input);
+      this.input = "";
+    }
   }
 };
 </script>
@@ -93,8 +101,7 @@ export default {
 
 .table {
   max-height: 60vh;
-  overflow-y: auto;
-  height: 300px;
+  overflow: auto;
 }
 .add-todo {
   margin-top: 20px;

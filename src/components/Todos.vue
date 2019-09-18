@@ -54,7 +54,7 @@
           placeholder="Create a new todo..."
           v-model="input"
         ></el-input>
-        <el-button type="primary">Add Todo</el-button>
+        <el-button class="add-todo-button" type="primary">Add Todo</el-button>
       </div>
     </el-card>
   </div>
@@ -104,6 +104,10 @@ export default {
 .add-todo-input {
   margin-right: 20px;
   max-width: 70%;
+}
+.add-todo-button {
+  width: 105px;
+  margin-right: 10px;
 }
 </style>
 

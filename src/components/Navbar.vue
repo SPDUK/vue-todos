@@ -1,7 +1,7 @@
 <template>
   <el-menu
     :default-active="$route.path"
-    class="el-menu-demo"
+    class="el-menu"
     mode="horizontal"
     router
   >
@@ -30,3 +30,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.el-menu {
+  margin-bottom: 60px;
+}
+</style>
